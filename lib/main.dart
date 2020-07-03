@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_bloc_test/home_page.dart';
+import 'package:flutter_bloc_test/bloc/weather_bloc.dart';
+import 'package:flutter_bloc_test/data/weather_repository.dart';
+import 'package:flutter_bloc_test/pages/weather_search_page.dart';
 
 void main() => runApp(App());
 
@@ -13,7 +16,10 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Flutter Bloc Test Home Page'),
+      home: BlocProvider(
+        create: (BuildContext context) => WeatherBloc(FakeWeatherRepository()),
+        child: WeatherSearchPage(),
+      ),
     );
   }
 }
